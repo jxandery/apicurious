@@ -48,4 +48,14 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
     assert_equal 'Targaryen', updated_item.name
     assert_equal 'dj hair', updated_item.description
   end
+
+  test '#destroy' do
+    item = Item.first
+
+    assert_difference('Item.count', -1) do
+      delete :destroy, format: :json, id: item.id
+    end
+
+    assert_response :success
+  end
 end
