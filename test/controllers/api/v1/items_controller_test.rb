@@ -24,8 +24,8 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
   end
 
   test '#create' do
-    items_params = {name: 'Targaryen', description: 'dj hair'}
-    post :create, format: :json, item: items_params
+    item_params = {name: 'Targaryen', description: 'dj hair'}
+    post :create, format: :json, item: item_params
 
     item = JSON.parse(response.body)
 
@@ -34,4 +34,12 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
     assert_equal 'dj hair', item['description']
   end
 
+  test '#update' do
+    original_item = Item.first
+
+    item_params = {name: 'Targaryen', description: 'dj hair'}
+    put :update, format: :json, id: original_item.id, item: item_params
+
+    assert_response :success
+  end
 end
