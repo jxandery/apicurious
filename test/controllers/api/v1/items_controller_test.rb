@@ -24,8 +24,10 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
   end
 
   test '#create' do
+    assert_difference('Item.count', 1) do
     item_params = {name: 'Targaryen', description: 'dj hair'}
     post :create, format: :json, item: item_params
+    end
 
     item = JSON.parse(response.body)
 
