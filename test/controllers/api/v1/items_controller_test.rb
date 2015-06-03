@@ -23,4 +23,15 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
     assert_equal 'rich but inbred', item['description']
   end
 
+  test '#create' do
+    items_params = {name: 'Targaryen', description: 'dj hair'}
+    post :create, format: :json, item: items_params
+
+    item = JSON.parse(response.body)
+
+    assert_response :success
+    assert_equal 'Targaryen', item['name']
+    assert_equal 'dj hair', item['description']
+  end
+
 end
