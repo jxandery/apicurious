@@ -40,6 +40,12 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
     item_params = {name: 'Targaryen', description: 'dj hair'}
     put :update, format: :json, id: original_item.id, item: item_params
 
+    updated_item = Item.first
+
     assert_response :success
+    refute_equal original_item.name, updated_item.name
+    refute_equal original_item.description, updated_item.description
+    assert_equal 'Targaryen', updated_item.name
+    assert_equal 'dj hair', updated_item.description
   end
 end
