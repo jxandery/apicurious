@@ -1,8 +1,10 @@
 class Api::V1::ItemsController < ApplicationController
+  respond_to :json, :xml
 
-  test '#index' do
-    get :index, format: :JSON
+  def index
+    respond_with Item.all
 
-    assert_response :success
   end
+
+
 end

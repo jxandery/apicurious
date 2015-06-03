@@ -1,7 +1,16 @@
 require 'test_helper'
 
 class Api::V1::ItemsControllerTest < ActionController::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test '#index' do
+    get :index, format: :json
+
+    items = JSON.parse(response.body)
+    first_item = items.first
+
+    assert_response :success
+    assert_equal 'Lanister', first_item['name']
+    assert_equal 'rich but inbred', first_item['description']
+    assert_equal 2, items.count
+  end
+
 end
