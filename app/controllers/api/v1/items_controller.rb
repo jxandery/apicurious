@@ -10,7 +10,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def create
-    respond_with :api, :v1, Item.create(item_params)
+    respond_with Item.create(item_params), location: ''
   end
 
 private
